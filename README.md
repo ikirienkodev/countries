@@ -1,16 +1,16 @@
 ### `docker-compose build`
 
-Сommand for build the project
+Сommand for build the project.
 
 
 ### `docker-compose up`
 
-Сommand for start the container
+Сommand for start the container.
 
 
 ### `docker-compose up --build`
 
-Сommand for build the project and start the container
+Сommand for build the project and start the container.
 
 
 ### `npm start`
