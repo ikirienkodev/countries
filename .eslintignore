@@ -1,0 +1,6 @@
+node_modules/**
+.husky
+.eslintrc.json
+README.md
+public/*
+package**

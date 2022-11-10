@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+
+import Header from './components/Header';
+import RequireAuth from './components/RequireAuth';
+import CountryPage from './pages/countries/[id]/CountryPage';
+import IndexPage from './pages/countries/index/IndexPage';
+import LoginPage from './pages/login';
+
+import '../src/styles/global.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Routes>
+      <Route path="/login" element={<RequireAuth redirectTo="/" reverse />}>
+        <Route index element={<LoginPage />} />
+      </Route>
+      <Route path="/" element={<RequireAuth redirectTo="/login" />}>
+        <Route
+          element={
+            <>
+              <Header />
+              <Outlet />
+            </>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="details/:alphaCode" element={<CountryPage />} />
+        </Route>
+      </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

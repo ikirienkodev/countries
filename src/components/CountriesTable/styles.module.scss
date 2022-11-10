@@ -1,0 +1,49 @@
+.countriesTable {
+  margin-top: 20px;
+
+  &__container {
+    overflow-y: scroll;
+    max-height: calc(100vh - 300px);
+
+    &__table {
+      &__head {
+        th {
+          padding: 20px 30px;
+          background: var(--light-grey);
+          color: #fff;
+          border-right: 1px solid #fff;
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+
+      &__body {
+        &__row {
+          & > * {
+            border-right: 1px solid var(--light-grey);
+            border-right-style: dashed;
+            &:last-child {
+              border-right: none;
+            }
+          }
+
+          &__cell {
+            padding: 20px 30px !important;
+          }
+        }
+      }
+    }
+  }
+
+  &__spinnerContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.countryName:hover {
+  cursor: pointer;
+}

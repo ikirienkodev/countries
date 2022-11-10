@@ -1,0 +1,27 @@
+.countryDetails {
+  &__container {
+    border-radius: 4px;
+    box-shadow: 0 0 5px var(--light-grey);
+
+    &__table {
+      &__row {
+        &__head {
+          width: 20% !important;
+          padding: 20px 30px !important;
+          background: var(--light-grey);
+          color: #fff !important;
+          font-size: 16px !important;
+          font-weight: 500 !important;
+        }
+
+        &__cell {
+          padding: 20px 30px !important;
+        }
+      }
+    }
+  }
+  img {
+    align-self: center;
+    box-shadow: 0 0 5px var(--light-grey);
+  }
+}

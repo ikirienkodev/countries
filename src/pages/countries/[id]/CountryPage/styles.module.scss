@@ -1,0 +1,10 @@
+.country-page {
+  padding: 60px;
+
+  &__spinnerContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
