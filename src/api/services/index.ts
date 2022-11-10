@@ -5,12 +5,12 @@ import { authApiInstance, countriesApiInstance } from '../index';
 
 import { ILoginRequest, ILoginResponse } from './types';
 
-const login = async (values: ILoginRequest): Promise<AxiosResponse<ILoginResponse, any>> =>
+const login = async (values: ILoginRequest): Promise<AxiosResponse<ILoginResponse>> =>
   await authApiInstance.post('/login', values);
 
-const getCountries = async (): Promise<AxiosResponse<ICountry[], any>> => await countriesApiInstance.get('/all');
+const getCountries = async (): Promise<AxiosResponse<ICountry[]>> => await countriesApiInstance.get('/all');
 
-const getCountry = async (cca3: string): Promise<AxiosResponse<ICountry[], any>> =>
+const getCountry = async (cca3: string): Promise<AxiosResponse<ICountry[]>> =>
   await countriesApiInstance.get(`/alpha/${cca3}`);
 
 export default {

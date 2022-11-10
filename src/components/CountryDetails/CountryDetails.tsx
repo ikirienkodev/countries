@@ -44,9 +44,7 @@ const CountryDetails = ({ country }: CountryDetailsProps) => {
     },
     {
       name: 'Flag',
-      content: (
-        <div className={styles.imageContainer}>{!!imgSrc && <img height="30px" src={imgSrc} alt="country-flag" />}</div>
-      ),
+      content: <>{!!imgSrc && <img height="30px" src={imgSrc} alt="country-flag" />}</>,
     },
   ];
 
