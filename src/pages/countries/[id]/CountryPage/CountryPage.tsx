@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
 import CountryDetails from '../../../../components/CountryDetails';
@@ -18,6 +18,7 @@ const CountryPage = () => {
   const { result: country, message, fetching } = useAppSelector((state) => state.COUNTRIES.country);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const { alphaCode } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -38,6 +39,10 @@ const CountryPage = () => {
     }
   }, [message]);
 
+  const onCloseErrorSnackbar = useCallback(() => {
+    navigate('/');
+  }, []);
+
   return (
     <div className={styles['country-page']}>
       {!!country && <CountryDetails country={country} />}
@@ -50,6 +55,7 @@ const CountryPage = () => {
         open={openErrorSnackbar}
         setOpen={setOpenErrorSnackbar}
         message={ErrorMessages[message?.toLowerCase() ?? ''] ?? message}
+        onClose={onCloseErrorSnackbar}
       />
     </div>
   );

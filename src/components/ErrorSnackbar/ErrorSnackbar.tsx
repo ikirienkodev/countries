@@ -4,13 +4,18 @@ export interface ErrorSnackbarProps {
   setOpen: (value: boolean) => void;
   message?: string | null;
   setMessage?: (message: string) => void;
+  onClose?: () => void;
 }
 
-const ErrorSnackbar = ({ open, setOpen, message, setMessage }: ErrorSnackbarProps): JSX.Element => {
+const ErrorSnackbar = ({ open, setOpen, message, setMessage, onClose }: ErrorSnackbarProps): JSX.Element => {
   const handleClose = (): void => {
     setOpen(false);
     if (setMessage) {
       setMessage('');
+    }
+
+    if (onClose) {
+      onClose();
     }
   };
 
