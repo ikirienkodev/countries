@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
@@ -14,7 +14,7 @@ const ErrorMessages: Record<string, string> = {
   'bad request': 'Page not found',
 };
 
-function CountryPage() {
+const CountryPage = () => {
   const { result: country, message, fetching } = useAppSelector((state) => state.COUNTRIES.country);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const { alphaCode } = useParams();
@@ -53,6 +53,6 @@ function CountryPage() {
       />
     </div>
   );
-}
+};
 
 export default CountryPage;

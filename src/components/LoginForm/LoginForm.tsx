@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
@@ -14,7 +14,7 @@ const ErrorMessages: Record<string, string> = {
   'user not found': 'User not found',
 };
 
-function LoginForm() {
+const LoginForm = () => {
   const login = useAppSelector((state) => state.AUTH.login);
   const isRememberMeChecked = useAppSelector((state) => state.AUTH.login.ui.isRememberMeChecked);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
@@ -37,6 +37,8 @@ function LoginForm() {
     onSubmit: handleSubmitLoginForm,
   });
 
+  const { values, errors, touched, isSubmitting } = formik;
+
   return (
     <div className={styles['login-form']}>
       <form className={styles['login-form__form']} onSubmit={formik.handleSubmit}>
@@ -46,23 +48,23 @@ function LoginForm() {
           fullWidth
           id="email"
           name="email"
-          label="Email"
-          value={formik.values.email}
+          placeholder="Email"
+          value={values.email}
           onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+          error={touched.email && Boolean(errors.email)}
+          helperText={touched.email && errors.email}
         />
         <TextField
           variant="outlined"
           fullWidth
           id="password"
           name="password"
-          label="Password"
+          placeholder="Password"
           type="password"
-          value={formik.values.password}
+          value={values.password}
           onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
+          error={touched.password && Boolean(errors.password)}
+          helperText={touched.password && errors.password}
         />
         <FormControlLabel
           control={
@@ -74,7 +76,7 @@ function LoginForm() {
           }
           label="Remember me"
         />
-        <Button color="primary" variant="contained" fullWidth type="submit" disabled={formik.isSubmitting}>
+        <Button color="primary" variant="contained" fullWidth type="submit" disabled={isSubmitting}>
           Submit
         </Button>
       </form>
@@ -85,6 +87,6 @@ function LoginForm() {
       />
     </div>
   );
-}
+};
 
 export default LoginForm;

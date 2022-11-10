@@ -1,15 +1,13 @@
-import React from 'react';
-
 import CountriesTable from '../../../../components/CountriesTable';
 
 import styles from './styles.module.scss';
 
-function IndexPage() {
+const IndexPage = () => {
   return (
     <div className={styles['index-page']}>
       <CountriesTable />
     </div>
   );
-}
+};
 
 export default IndexPage;

@@ -7,11 +7,9 @@ import { ReducersNames } from '../../../types';
 export const getCountriesThunk = createAsyncThunk(`${ReducersNames.COUNTRIES}/getCountries`, async (_, thunkAPI) => {
   try {
     const response = await api.getCountries();
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      return thunkAPI.rejectWithValue(JSON.stringify(response) ?? 'Unknown error');
-    }
+    return response.status === 200
+      ? response.data
+      : thunkAPI.rejectWithValue(JSON.stringify(response) ?? 'Unknown error');
   } catch (e: any) {
     return thunkAPI.rejectWithValue(
       (e as AxiosError<{ message: string }>)?.response?.data?.message ?? e?.message ?? JSON.stringify(e)
@@ -24,11 +22,9 @@ export const getCountryThunk = createAsyncThunk(
   async (cca3: string, thunkAPI) => {
     try {
       const response = await api.getCountry(cca3);
-      if (response.status === 200) {
-        return response.data[0];
-      } else {
-        return thunkAPI.rejectWithValue(JSON.stringify(response) ?? 'Unknown error');
-      }
+      return response.status === 200
+        ? response.data[0]
+        : thunkAPI.rejectWithValue(JSON.stringify(response) ?? 'Unknown error');
     } catch (e: any) {
       return thunkAPI.rejectWithValue(
         (e as AxiosError<{ message: string }>)?.response?.data.message ?? e?.message ?? JSON.stringify(e)

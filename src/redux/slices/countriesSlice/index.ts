@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { initDetail, initList, onFulfilledReducer, onPendingReducer, onRejectedReducer } from '../../reducers';
-import { CountriesStateDraft, ICountriesState, ICountry,ReducersNames } from '../../types';
+import { CountriesStateDraft, ICountriesState, ICountry, ReducersNames } from '../../types';
 
 import { getCountriesThunk, getCountryThunk } from './asyncActions';
 

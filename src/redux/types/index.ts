@@ -24,7 +24,6 @@ export type List<T> = {
 export type StateType = {
   [k: string]: FetchStatus;
 };
-
 export interface IAuthState {
   login: {
     ui: {
@@ -35,7 +34,6 @@ export interface IAuthState {
 }
 
 export type AuthStateDraft = WritableDraft<IAuthState>;
-
 export interface ICountry {
   cca2: string;
   cca3: string;
@@ -64,7 +62,6 @@ export interface ICountry {
     svg?: string;
   };
 }
-
 export interface ICountriesState {
   countries: List<ICountry>;
   country: Detail<ICountry | null>;

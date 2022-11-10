@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -9,7 +8,7 @@ import LoginPage from './pages/login';
 
 import '../src/styles/global.scss';
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/login" element={<RequireAuth redirectTo="/" reverse />}>
@@ -31,6 +30,6 @@ function App() {
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-}
+};
 
 export default App;

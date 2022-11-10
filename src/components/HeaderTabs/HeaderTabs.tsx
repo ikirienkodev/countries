@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, matchPath, useLocation } from 'react-router-dom';
 import { Tab, Tabs } from '@mui/material';
 
@@ -21,16 +20,17 @@ function useRouteMatch(patterns: readonly string[]) {
   return null;
 }
 
-function HeaderTabs() {
+const HeaderTabs = () => {
   const dispatch = useAppDispatch();
   const routeMatch = useRouteMatch(['/']);
   const currentTab = routeMatch?.pattern?.path ?? '';
+
   return (
     <Tabs className={styles['header-tabs']} value={currentTab}>
       <Tab label="Index" value="/" to="/" component={Link} />
       <Tab label="Log out" onClick={() => dispatch(authActions.logout())} />
     </Tabs>
   );
-}
+};
 
 export default HeaderTabs;

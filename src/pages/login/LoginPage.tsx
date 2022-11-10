@@ -4,12 +4,12 @@ import LoginForm from '../../components/LoginForm';
 
 import styles from './styles.module.scss';
 
-function LoginPage() {
+const LoginPage = () => {
   return (
     <div className={styles['login-page']}>
       <LoginForm />
     </div>
   );
-}
+};
 
 export default LoginPage;

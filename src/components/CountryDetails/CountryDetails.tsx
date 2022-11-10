@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Table, TableCell, TableRow } from '@mui/material';
 
 import { ICountry } from '../../redux/types';
@@ -14,23 +14,25 @@ interface ITableRow {
   content: ReactNode;
 }
 
-function CountryDetails({ country }: CountryDetailsProps) {
-  const imgSrc = country.flags.svg ?? country.flags.png ?? '';
+const CountryDetails = ({ country }: CountryDetailsProps) => {
+  const { name, currencies, languages, flags } = country;
+
+  const imgSrc = flags.svg ?? flags.png ?? '';
 
   const tableRows: ITableRow[] = [
     {
       name: 'Common Name',
-      content: <p>{country.name.common}</p>,
+      content: <p>{name.common}</p>,
     },
     {
       name: 'Official Name',
-      content: <p>{country.name.official}</p>,
+      content: <p>{name.official}</p>,
     },
     {
       name: 'Currencies',
       content: (
         <>
-          {Object.values(country.currencies).map(({ name, symbol }) => (
+          {Object.values(currencies).map(({ name, symbol }) => (
             <p key={name}>{`${name} - ${symbol}`}</p>
           ))}
         </>
@@ -38,7 +40,7 @@ function CountryDetails({ country }: CountryDetailsProps) {
     },
     {
       name: 'Languages',
-      content: <p>{Object.values(country.languages).join(' | ')}</p>,
+      content: <p>{Object.values(languages).join(' | ')}</p>,
     },
     {
       name: 'Flag',
@@ -52,18 +54,18 @@ function CountryDetails({ country }: CountryDetailsProps) {
     <div className={styles.countryDetails}>
       <div className={styles['countryDetails__container']}>
         <Table className={styles['countryDetails__container__table']}>
-          {tableRows.map((row) => (
-            <TableRow className={styles['countryDetails__container__table__row']} key={row.name}>
+          {tableRows.map(({ name, content }) => (
+            <TableRow className={styles['countryDetails__container__table__row']} key={name}>
               <TableCell className={styles['countryDetails__container__table__row__head']} variant="head">
-                {row.name}
+                {name}
               </TableCell>
-              <TableCell className={styles['countryDetails__container__table__row__cell']}>{row.content}</TableCell>
+              <TableCell className={styles['countryDetails__container__table__row__cell']}>{content}</TableCell>
             </TableRow>
           ))}
         </Table>
       </div>
     </div>
   );
-}
+};
 
 export default CountryDetails;

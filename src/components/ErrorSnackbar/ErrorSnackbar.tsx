@@ -1,6 +1,4 @@
-import React from 'react';
 import { Button, Snackbar } from '@mui/material';
-
 export interface ErrorSnackbarProps {
   open: boolean;
   setOpen: (value: boolean) => void;
@@ -8,7 +6,7 @@ export interface ErrorSnackbarProps {
   setMessage?: (message: string) => void;
 }
 
-function ErrorSnackbar({ open, setOpen, message, setMessage }: ErrorSnackbarProps): JSX.Element {
+const ErrorSnackbar = ({ open, setOpen, message, setMessage }: ErrorSnackbarProps): JSX.Element => {
   const handleClose = (): void => {
     setOpen(false);
     if (setMessage) {
@@ -33,7 +31,7 @@ function ErrorSnackbar({ open, setOpen, message, setMessage }: ErrorSnackbarProp
       }
     />
   );
-}
+};
 
 ErrorSnackbar.defaultProps = {
   message: '',

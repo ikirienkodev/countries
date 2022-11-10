@@ -64,7 +64,7 @@ const TableHeadCellList: ITableHeadCell[] = [
   },
 ];
 
-function CountriesTable() {
+const CountriesTable = () => {
   const { result: countries, message, fetching } = useAppSelector((state) => state.COUNTRIES.countries);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
@@ -98,36 +98,32 @@ function CountriesTable() {
         <Table stickyHeader aria-label="sticky table" className={styles['countriesTable__container__table']}>
           <TableHead className={styles['countriesTable__container__table__head']}>
             <TableRow>
-              {TableHeadCellList.map((x) => (
-                <TableCell key={x.name} {...x.props}>
-                  <span>{x.name}</span>
+              {TableHeadCellList.map(({ name, props }) => (
+                <TableCell key={name} {...props}>
+                  <span>{name}</span>
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody className={styles['countriesTable__container__table__body']}>
-            {countries.map((row, index) => (
-              <TableRow className={styles['countriesTable__container__table__body__row']} key={row.cca2}>
-                <TableCell className={styles['countriesTable__container__table__body__row__cell']}>
-                  {row.cca2}
-                </TableCell>
+            {countries.map(({ cca2, name, capital, cca3 }, index) => (
+              <TableRow className={styles['countriesTable__container__table__body__row']} key={cca2}>
+                <TableCell className={styles['countriesTable__container__table__body__row__cell']}>{cca2}</TableCell>
                 <TableCell
                   className={`${styles['countriesTable__container__table__body__row__cell']} ${styles['countryName']}`}
                   onClick={(e) => handleClick(e, index)}
                 >
-                  {row.name.common}
+                  {name.common}
                 </TableCell>
-                <TableCell className={styles['countriesTable__container__table__body__row__cell']}>
-                  {row.capital}
-                </TableCell>
+                <TableCell className={styles['countriesTable__container__table__body__row__cell']}>{capital}</TableCell>
                 <TableCell className={styles['countriesTable__container__table__body__row__cell']} align="center">
-                  <Link to={`/details/${row.cca3}`}>
+                  <Link to={`/details/${cca3}`}>
                     <VisibilityOutlinedIcon color="primary" />
                   </Link>
                 </TableCell>
               </TableRow>
             ))}
-            {fetching ? (
+            {fetching && (
               <TableRow key="row-spinner">
                 <TableCell colSpan={4}>
                   <div className={styles['countriesTable__spinnerContainer']}>
@@ -135,7 +131,7 @@ function CountriesTable() {
                   </div>
                 </TableCell>
               </TableRow>
-            ) : null}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -145,6 +141,6 @@ function CountriesTable() {
       <ErrorSnackbar open={openErrorSnackbar} setOpen={setOpenErrorSnackbar} message={message} />
     </div>
   );
-}
+};
 
 export default CountriesTable;

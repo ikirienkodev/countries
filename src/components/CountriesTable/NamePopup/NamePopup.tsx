@@ -1,4 +1,3 @@
-import React from 'react';
 import { Popover, PopoverProps } from '@mui/material';
 
 import { ICountry } from '../../../redux/types';
@@ -11,14 +10,14 @@ export interface NamePopupProps extends PopoverProps {
   country: ICountry;
 }
 
-function NamePopup({ handleClose, country, anchorEl, open }: NamePopupProps) {
+const NamePopup = ({ handleClose, country, anchorEl, open }: NamePopupProps) => {
+  const { name } = country;
   const defineNativeName = (key: 'common' | 'official') => {
-    const langs = Object.keys(country.name.nativeName);
-    if (!langs.length) {
-      return country.name[key];
-    }
+    const langs = Object.keys(name.nativeName);
 
-    return country.name.nativeName[langs[0]][key];
+    if (!langs.length) return name[key];
+
+    return name.nativeName[langs[0]][key];
   };
 
   return (
@@ -36,11 +35,11 @@ function NamePopup({ handleClose, country, anchorEl, open }: NamePopupProps) {
       }}
     >
       <div className={styles['popoverContainer']}>
-        <p>{`${country.name.common} / ${defineNativeName('common')}`}</p>
-        <p>{`${country.name.official} / ${defineNativeName('official')}`}</p>
+        <p>{`${name.common} / ${defineNativeName('common')}`}</p>
+        <p>{`${name.official} / ${defineNativeName('official')}`}</p>
       </div>
     </Popover>
   );
-}
+};
 
 export default NamePopup;
