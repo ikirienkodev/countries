@@ -23,6 +23,7 @@ export const onPendingReducer =
   (state: S, action: PayloadAction<any>) => {
     state[key].fetching = true;
     state[key].success = false;
+    state[key].message = null;
     if (callback) callback(state, action);
   };
 
